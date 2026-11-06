@@ -1,5 +1,7 @@
 # FADE: Functional Alignment for Distributional Equivalence
 
+![illustration][assets/fade_illustration.png]
+
 FADE is a metric for evaluating machine unlearning. It compares an unlearned model u
 with a retain-only oracle r -- a model trained the same way but without the forget
 data -- and measures how far apart their output distributions are on the forget
