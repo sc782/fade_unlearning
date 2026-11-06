@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# editors
+.idea
+.vscode
+*.swp
+*.ipynb_checkpoints/
+
+# model weights / checkpoints (published via HuggingFace, not committed here)
+*.ckpt
+*.pth
+*.safetensors
+ckpts/
+diffusion_model_finetuning/stable_diffusion/models/
+machine_unlearning/*/stable_diffusion/models/
+
+# generated data / results / logs (regenerate via scripts/, or download via
+# scripts/download_checkpoints.sh)
+diffusion_model_finetuning/data/
+diffusion_model_finetuning/logs/
+diffusion_model_finetuning/output_images/
+diffusion_model_finetuning/output_eval/
+diffusion_model_finetuning/output_fade/
+diffusion_model_finetuning/plots/
+diffusion_model_finetuning/cache/
+machine_unlearning/*/results/
+machine_unlearning/*/logs/
+machine_unlearning/*/cache/
+machine_unlearning/*/wandb/
+machine_unlearning/*/data/*/images.txt
+# exception: CA's regularization-image manifest is real data, not a regenerable
+# pointer into the external dataset -- keep it
+!machine_unlearning/mu_concept_ablation_ca/data/painting_gen/images.txt
