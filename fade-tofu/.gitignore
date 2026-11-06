@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+
+# model weights / checkpoints (published via HuggingFace, not committed here)
+ckpts/
+*.safetensors
+
+# generated samples / FADE results / logs (regenerate via scripts/)
+outputs/
+logs/
+
+# unpublished pilot work
+pilot/

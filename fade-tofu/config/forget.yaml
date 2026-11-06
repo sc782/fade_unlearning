@@ -1,0 +1,29 @@
+# LoRA unlearning of a full-data model on one TOFU forget split.
+model_family: llama3.1-8b
+data_path: locuslab/TOFU
+method: null          # ga | gd | npo | dpo | ihl  (models.METHODS)
+split: null           # forget01 | forget05 | forget10
+seed: 0
+model_path: full/seed${seed}   # starting model: checkpoint spec or local directory
+
+LoRA:
+  r: 32
+  alpha: 64           # 2 * r for every published adapter
+  dropout: 0.0
+
+batch_size: 2
+gradient_accumulation_steps: 16
+num_epochs: 5         # an adapter is saved after every epoch
+lr: 1e-4
+weight_decay: 0.01
+max_length: 500
+optim: paged_adamw_32bit
+deepspeed: null      # unlearning runs on 1 GPU; config/ds_config.json for multi-GPU
+
+# NPO hyperparameters
+beta: 0.1
+npo_coeff: 1.0
+grad_diff_coeff: 1.0
+
+# same layout as the published adapters: <method>/r32/forget01/seed0/checkpoint-5
+save_dir: ckpts/${method}/r${LoRA.r}/${split}/seed${seed}

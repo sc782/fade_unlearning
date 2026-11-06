@@ -1,0 +1,18 @@
+# Full-parameter fine-tuning on a TOFU split: split=full gives the starting-point model,
+# split=retain99/retain95/retain90 the retain-only oracles for forget01/05/10.
+model_family: llama3.1-8b
+data_path: locuslab/TOFU
+split: full
+seed: 0
+
+batch_size: 1                    # per device; the published models used 4 GPUs
+gradient_accumulation_steps: 8   # -> effective batch 32, 625 steps for split=full
+num_epochs: 5
+lr: 1e-5
+weight_decay: 0.01
+max_length: 500
+optim: paged_adamw_32bit
+deepspeed: config/ds_config.json  # null for single-GPU runs without DeepSpeed
+
+# null -> same layout as the published checkpoints: ckpts/full/seed0, ckpts/retain/retain99/seed0
+save_dir: null

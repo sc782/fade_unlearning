@@ -1,0 +1,24 @@
+name: fade_tofu
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    # torch must come from the cu128 index *with* its CUDA library dependencies: the
+    # default PyPI wheel (cu126) has no Blackwell (sm_120) kernels, and mixing a cu128
+    # torch with cu126 nvidia-* libraries silently runs bf16 matmuls ~8x slower.
+    - --extra-index-url https://download.pytorch.org/whl/cu128
+    - torch==2.7.1+cu128
+    - vllm==0.10.1.1
+    - transformers==4.55.4   # vllm 0.10.1 / peft 0.16 do not support transformers 5
+    - peft==0.16.0
+    - datasets==3.6.0
+    - huggingface-hub==0.36.2
+    - accelerate==1.15.0
+    - hydra-core==1.3.7
+    - omegaconf==2.3.1
+    - bitsandbytes==0.50.2   # paged_adamw_32bit
+    - deepspeed              # multi-GPU fine-tuning (config/ds_config.json)
+    - numpy
+    - pytest

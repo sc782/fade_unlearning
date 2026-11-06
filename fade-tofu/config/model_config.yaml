@@ -1,0 +1,18 @@
+# Prompt format and HF base model for each supported model family. The prompt for a
+# question is question_start_tag + question + question_end_tag + answer_tag, and the
+# answer follows it directly (see models.format_prompt).
+llama3.1-8b:
+  hf_key: "NousResearch/Meta-Llama-3.1-8B-Instruct"
+  question_start_tag: "[INST] "
+  question_end_tag: " [/INST]"
+  answer_tag: ""
+  gradient_checkpointing: true
+
+# Tiny model for smoke-testing the training/generation/FADE code paths end to end
+# (tests/smoke_test.sh) -- not used for any reported result.
+smoke-test:
+  hf_key: "HuggingFaceTB/SmolLM2-135M"
+  question_start_tag: "Question: "
+  question_end_tag: "\n"
+  answer_tag: "Answer: "
+  gradient_checkpointing: false
